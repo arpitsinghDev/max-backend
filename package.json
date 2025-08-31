@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node --watch index.js",
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "^2.0.2",
     "mysql2": "^3.14.3",
+    "nodemailer": "^7.0.6",
     "redis": "^5.8.2",
     "sequelize": "^6.37.7"
   }

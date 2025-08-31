@@ -1,9 +1,9 @@
 const router = require("express").Router();
 const { query } = require("express-validator");
-const validate = require("../middleware/validate");
-const { authenticate, requireRole } = require("../middleware/auth");
-const upload = require("../config/multer");
-const U = require("../controllers/user.controller");
+const validate = require("../middleware/validate.js");
+const { authenticate, requireRole } = require("../middleware/auth.js");
+const upload = require("../config/multer.js");
+const U = require("../controllers/user.controller.js");
 
 router.get("/", authenticate, /* optionally requireRole("admin"), */ [
   query("page").optional().isInt({ min: 1 }),

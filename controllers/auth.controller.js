@@ -1,7 +1,7 @@
-const { signAccess, signRefresh, verifyRefresh } = require("../utils/jwt");
-const { client: redis } = require("../config/redis");
-const { sendMail } = require("../config/email");
-const User = require("../models/User");
+const { signAccess, signRefresh, verifyRefresh } = require("../utility/jwt.js");
+const { client: redis } = require("../config/redis.js");
+const { sendMail } = require("../config/email.js");
+const User = require("../models/User.js");
 const jwt = require("jsonwebtoken");
 
 const REFRESH_KEY = (id) => `refresh:${id}`;

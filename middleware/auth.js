@@ -1,4 +1,4 @@
-const { verifyAccess } = require("../utility/jwt");
+const { verifyAccess } = require("../utility/jwt.js");
 
 function authenticate(req, res, next) {
   const header = req.headers.authorization || "";

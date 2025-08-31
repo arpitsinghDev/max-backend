@@ -4,12 +4,15 @@ const fs = require("fs");
 const express = require("express");
 const cors = require("cors");
 const sequelize = require("./config/db.js");
-const { connectRedis } = require("./config/redis");
+const { connectRedis } = require("./config/redis.js");
 const authRoutes = require("./routes/auth.routes.js");
 const userRoutes = require("./routes/user.routes.js");
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: process.env.CLIENT_URL || "http://localhost:5173",  // frontend URL
+  credentials: true                 // allow cookies / auth headers
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

@@ -1,8 +1,8 @@
 const router = require("express").Router();
 const { body, query } = require("express-validator");
-const validate = require("../middleware/validate");
-const upload = require("../config/multer");
-const C = require("../controllers/auth.controller");
+const validate = require("../middleware/validate.js");
+const upload = require("../config/multer.js");
+const C = require("../controllers/auth.controller.js");
 
 router.post(
   "/register",

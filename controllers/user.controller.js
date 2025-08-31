@@ -1,5 +1,5 @@
 const { Op } = require("sequelize");
-const User = require("../models/User");
+const User = require("../models/User.js");
 
 exports.list = async (req, res) => {
   const page = Math.max(parseInt(req.query.page) || 1, 1);

@@ -1,0 +1,139 @@
+{
+  "info": {
+    "name": "Auth API Collection",
+    "_postman_id": "d6a42c1a-1234-5678-9876-auth-api",
+    "description": "Postman collection for User Authentication & Authorization APIs with JWT, refresh tokens, password reset, RBAC.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Register User",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/auth/register", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","auth","register"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\",\n  \"profileImage\": \"base64string\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Verify Email",
+      "request": {
+        "method": "GET",
+        "url": { "raw": "http://localhost:5000/api/auth/verify-email?token={{verifyToken}}", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","auth","verify-email"], "query": [{ "key": "token", "value": "{{verifyToken}}" }] }
+      }
+    },
+    {
+      "name": "Login User",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","auth","login"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"john@example.com\",\n  \"password\": \"123456\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Refresh Token",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/auth/refresh-token", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","auth","refresh-token"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"refreshToken\": \"{{refreshToken}}\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Forgot Password",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/auth/forgot-password", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","auth","forgot-password"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"john@example.com\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Reset Password",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/auth/reset-password?token={{resetToken}}", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","auth","reset-password"], "query": [{ "key": "token", "value": "{{resetToken}}" }] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"newPassword\": \"newpassword123\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get My Profile",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/users/me", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","users","me"] }
+      }
+    },
+    {
+      "name": "Update My Profile",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/users/me", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","users","me"] },
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"John Updated\",\n  \"profileImage\": \"newBase64\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Get All Users (Admin)",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/users?page=1&limit=10&search=john", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","users"], "query": [{ "key": "page", "value": "1" }, { "key": "limit", "value": "10" }, { "key": "search", "value": "john" }] }
+      }
+    },
+    {
+      "name": "Delete User (Admin)",
+      "request": {
+        "method": "DELETE",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/users/{{userId}}", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","users","{{userId}}"] }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "accessToken", "value": "" },
+    { "key": "refreshToken", "value": "" },
+    { "key": "verifyToken", "value": "" },
+    { "key": "resetToken", "value": "" },
+    { "key": "userId", "value": "" }
+  ]
+}
