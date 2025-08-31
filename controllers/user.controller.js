@@ -1,4 +1,4 @@
-const { Op } = require("sequelize");
+const { Op,literal } = require("sequelize");
 const User = require("../models/User.js");
 
 exports.list = async (req, res) => {
@@ -13,7 +13,10 @@ exports.list = async (req, res) => {
 
   const { rows, count } = await User.findAndCountAll({
     where,
-    attributes: ["id", "email", "name", "role", "profileImage", "createdAt"],
+    attributes: ["id", "email", "name", "role", [
+  literal(`CONCAT('http://localhost:5000/uploads/', profileImage)`),
+  "profileImage"
+], "createdAt"],
     limit, offset, order: [["createdAt", "DESC"]],
   });
 
