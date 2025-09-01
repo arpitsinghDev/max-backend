@@ -14,7 +14,7 @@ exports.list = async (req, res) => {
   const { rows, count } = await User.findAndCountAll({
     where,
     attributes: ["id", "email", "name", "role", [
-  literal(`CONCAT('http://localhost:5000/uploads/', profileImage)`),
+  literal(`CONCAT('${process.env.SERVER_URL}/uploads/', profileImage)`),
   "profileImage"
 ], "createdAt"],
     limit, offset, order: [["createdAt", "DESC"]],
@@ -24,7 +24,10 @@ exports.list = async (req, res) => {
 };
 
 exports.me = async (req, res) => {
-  const user = await User.findByPk(req.user.userId, { attributes: ["id","email","name","role","profileImage","isEmailVerified"] });
+  const user = await User.findByPk(req.user.userId, { attributes: ["id","email","name","role",[
+  literal(`CONCAT('${process.env.SERVER_URL}/uploads/', profileImage)`),
+  "profileImage"
+],"isEmailVerified"] });
   res.json({ user: user });
 };
 
